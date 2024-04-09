@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>中文認字</title>
+    <style>
+      body: {
+      }
+
+      .main-container {
+        width: 80%;
+	margin-inline: auto;
+	display: flex;
+	flex-direction: column;
+	row-gap: 5rem;
+	justify-content: center;
+	height: 100vh;
+	margin-block: auto;
+      }
+
+      .main-container > div {
+        width: 100%;
+	display: flex;
+	justify-content: center;
+      }
+
+      #main {
+        display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-block: 20px;
+      }
+
+      .button-container > button {
+        font-size: 8rem;
+      }
+
+      .answer {
+	display: flex;
+	flex-direction: row;
+	column-gap: 2rem;
+	align-items: center;
+        font-size: 8rem;
+	font-weight: bolder;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div id="main">
+        <div class="answer">
+	  <div>A.</div>
+	  <div id="word1"></div></div>
+        <div class="answer">
+	  <div>B.</div>
+	  <div id="word2"></div></div>
+        <div class="answer">
+	  <div>C.</div>
+	  <div id="word3"></div></div>
+      </div>
+      <div class="button-container"><button onClick="showWords()">&#9654;</button>
+    <div>
+    <script>
+      const allWords = [
+        "爸",
+	"月",
+	"水",
+	"山",
+	"果",
+	"媽",
+	"心",
+	"星",
+	"雨",
+	"天",
+	"太",
+	"笑",
+	"女",
+	"男",
+	"小",
+	"上",
+	"下",
+	"山",
+	"田",
+	"土",
+	"地",
+	"手",
+	"石",
+	"人",
+	"火",
+	"耳",
+	"木",
+      ]
+      let words = undefined
+
+      const wordNodes = [
+      	document.querySelector('#word1'),
+      	document.querySelector('#word2'),
+      	document.querySelector('#word3')
+      ]
+
+      const getWords = (nodes) => {
+      	const found = new Set()
+	while(found.size !== nodes.length) {
+	  const index = Math.floor(Math.random() * words.length)
+	  const word = words[index]
+	  if(!found.has(word)) {
+	    found.add(word)
+	    nodes[found.size-1].innerHTML = word.content
+	    word.count++
+	    if(word.count > 3) {
+	       words.splice(index, 1)
+	    }
+	  }
+	}
+      }
+
+      const showWords = () => {
+	if(words === undefined || words.length < wordNodes.length) {
+          words = allWords.map(content => ({content, count: 0}))
+	}
+
+	getWords(wordNodes)
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+      	showWords()
+      })
+    </script>
+  </body>
+</html>
