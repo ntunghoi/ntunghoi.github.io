@@ -4,22 +4,18 @@
     <meta charset="utf-8" />
     <title>中文認字</title>
     <style>
-      body: {
-      }
-
       .main-container {
         width: 80%;
 	margin-inline: auto;
 	display: flex;
 	flex-direction: column;
-	row-gap: 5rem;
+	row-gap: 4rem;
 	justify-content: center;
-	height: 100vh;
-	margin-block: auto;
+	height: 98dvh;
       }
 
       .main-container > div {
-        width: 100%;
+        width: 100dwh;
 	display: flex;
 	justify-content: center;
       }
@@ -28,24 +24,60 @@
         display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding-block: 20px;
+	column-gap: 1rem;
       }
 
       .button-container > button {
-        font-size: 8rem;
+        font-size: 4rem;
       }
 
       .answer {
 	display: flex;
 	flex-direction: row;
-	column-gap: 2rem;
+	column-gap: 1rem;
 	align-items: center;
-        font-size: 8rem;
+        font-size: 5rem;
 	font-weight: bolder;
+      }
+
+      .fullscreen-toggle {
+        position: absolute;
+	top: 0;
+	right: 0;
+	border: 0;
+	font-size: 2rem;
+      }
+
+      .fullscreen-toggle label {
+        position: absolute;
+	top: 2rem;
+	right: 2rem;
+      }
+
+      .fullscreen-toggle input[type="radio"] {
+        visibility: hidden;
+      }
+
+      #enterFullscreen-radio:checked+#enterFullscreen-label,
+      #exitFullscreen-radio:checked+#exitFullscreen-label {
+        visibility: hidden;
+      }
+
+      #enterFullscreen-radio:not(checked)+#enterFullscreen-label, 
+      #exitFullscreen-radio:not(checked)+#exitFullscreen-label {
+        visibility: visible;
       }
     </style>
   </head>
-  <body>
+  <body style="relative">
+    <form>
+      <div class="fullscreen-toggle">
+        <input name="fullscreen-mode" id="enterFullscreen-radio" type="radio" onclick="toggleFullscreen()" />
+	<label for="enterFullscreen-radio" id="enterFullscreen-label">&#x26F6;</label>
+        <input name="fullscreen-mode" id="exitFullscreen-radio" type="radio" checked onclick="toggleFullscreen()" />
+	<label for="exitFullscreen-radio" id="exitFullscreen-label">&#x2715;</label>
+      </div>
+    </form>
     <div class="main-container">
       <div id="main">
         <div class="answer">
@@ -58,7 +90,9 @@
 	  <div>C.</div>
 	  <div id="word3"></div></div>
       </div>
-      <div class="button-container"><button onClick="showWords()">&#9654;</button>
+      <div class="button-container">
+        <button onClick="showWords()">&#9654;</button>
+      </div>
     <div>
     <script>
       const allWords = [
@@ -125,6 +159,23 @@
       document.addEventListener('DOMContentLoaded', () => {
       	showWords()
       })
+
+      const toggleFullscreen = () => {
+	if(document.fullscreenElement) {
+	  if(document.exitFullscreen) {
+	    document.exitFullscreen()
+	  } else if(document.webkitExitFullscreen) {
+	    document.webkitExitFullscreen()
+	  }
+	} else {
+          const element = document.documentElement
+	  if(element.requestFullscreen) {
+	    element.requestFullscreen()
+	  } else if(element.webkitRequestFullscreen) {
+	    element.webkitRequestFullscreen()
+	  }
+	}
+      }
     </script>
   </body>
 </html>
