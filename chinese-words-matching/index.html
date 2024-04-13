@@ -82,13 +82,20 @@
       <div id="main">
         <div class="answer">
 	  <div>A.</div>
-	  <div id="word1"></div></div>
+	  <div id="word1"></div>
+        </div>
         <div class="answer">
 	  <div>B.</div>
-	  <div id="word2"></div></div>
+	  <div id="word2"></div>
+	</div>
         <div class="answer">
 	  <div>C.</div>
-	  <div id="word3"></div></div>
+	  <div id="word3"></div>
+	</div>
+        <div class="answer">
+	  <div>D.</div>
+	  <div id="word4"></div>
+	</div>
       </div>
       <div class="button-container">
         <button onClick="showWords()">&#9654;</button>
@@ -123,13 +130,37 @@
 	"火",
 	"耳",
 	"木",
+	"雪",
+	"雲",
+	"車",
+	"馬",
+	"狗",
+	"豬",
+	"貓",
+	"紅",
+	"白",
+	"緑",
+	"藍",
+	"棕",
+	"黃",
+	"青",
+	"紫",
+	"男",
+	"女",
+	"父",
+	"母",
+	"蛇",
+	"龍",
+	"龜",
+	"星"
       ]
       let words = undefined
 
       const wordNodes = [
       	document.querySelector('#word1'),
       	document.querySelector('#word2'),
-      	document.querySelector('#word3')
+      	document.querySelector('#word3'),
+      	document.querySelector('#word4')
       ]
 
       const getWords = (nodes) => {
